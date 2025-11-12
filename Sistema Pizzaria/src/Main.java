@@ -7,29 +7,25 @@ public class Main {
         System.out.println("Digite seu endereço: ");
         String endereco = scanner.nextLine();
 
-        System.out.println("Digite o número de qual pizza deseja");
-        System.out.println("[1] Calebresa");
+        System.out.println("Digite o número da pizza desejada:");
+        System.out.println("[1] Calabresa");
         System.out.println("[2] Quatro Queijos");
         System.out.println("[3] Portuguesa");
-        Integer opcao = scanner.nextInt();
+        int opcao = scanner.nextInt();
 
-        String nomePizza;
-        switch (opcao) {
-            case 1:
-                nomePizza = "Calabresa";
-                break;
-            case 2:
-                nomePizza = "Quatro Queijos";
-                break;
-            case 3:
-                nomePizza = "Portuguesa";
-                break;
-            default:
-                nomePizza = "";
-        }
+        String nomePizza = switch (opcao) {
+            case 1 -> "Calabresa";
+            case 2 -> "Quatro Queijos";
+            case 3 -> "Portuguesa";
+            default -> "";
+        };
 
-        PedidoControle pedidoControle = new PedidoControle();
+        // Injeção de dependências
+        IPizzaFactory fabrica = new PizzaFactory();
+        IEnvio envio = new Envio();
 
-        pedidoControle.fazerPedido(nomePizza, endereco);
+        // O Controller coordena o caso de uso
+        PedidoController controller = new PedidoController(fabrica, envio);
+        controller.fazerPedido(nomePizza, endereco);
     }
 }
