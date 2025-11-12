@@ -1,3 +1,8 @@
+/**
+ * GRASP: POLYMORPHISM
+ * Implementa o comportamento específico da pizza Quatro Queijos.
+ * Garante alta coesão, pois contém apenas lógica referente a esse tipo de pizza.
+ */
 public class QuatroQueijos implements Pizza {
     public String nome = "Quatro Queijos";
 
